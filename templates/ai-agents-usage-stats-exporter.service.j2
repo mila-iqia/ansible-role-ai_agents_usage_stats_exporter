@@ -1,0 +1,22 @@
+[Unit]
+Description=ai-agents-usage-stats-exporter
+After=network.target
+StartLimitIntervalSec=125
+StartLimitBurst=4
+
+[Service]
+Type=simple
+Environment="PATH={{ ai_agents_usage_stats_exporter_path }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+{% if ansible_facts['os_family'] == 'Debian' %}
+EnvironmentFile=-/etc/default/ai-agents-usage-stats-exporter
+{% else %}
+EnvironmentFile=-/etc/sysconfig/ai-agents-usage-stats-exporter
+{% endif %}
+ExecStart=/usr/bin/python3 {{ ai_agents_usage_stats_exporter_path }}/ai_agents_usage_stats_exporter.py --port 9799
+PIDFile=/var/run/ai-agents-usage-stats-exporter.pid
+KillMode=process
+RestartSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
