@@ -8,7 +8,7 @@
 
 - name: Clone ai-agents-usage-stats-exporter repo
   ansible.builtin.git:
-    repo: "{{ ai_agents_usage_stats_exporter }}"
+    repo: "{{ ai_agents_usage_stats_exporter_git_repo }}"
     dest: /var/tmp/ai-agents-usage-stats-exporter
     version: "{{ ai_agents_usage_stats_exporter_version }}"
 
@@ -30,10 +30,11 @@
     mode: 0640
   notify: Restart ai-agents-usage-stats-exporter
 
-- name: Install ai_agents_usage_stats_exporter.service
-  ansible.builtin.template:
+- name: Install ai-agents-usage-stats-exporter.service
+  ansible.builtin.copy:
     src: /var/tmp/ai-agents-usage-stats-exporter/ai-agents-usage-stats-exporter.service
     dest: /etc/systemd/system/ai-agents-usage-stats-exporter.service
+    remote_src: true
     owner: root
     group: root
     mode: 0644
