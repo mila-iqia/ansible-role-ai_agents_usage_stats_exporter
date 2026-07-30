@@ -8,7 +8,7 @@
 
 - name: Clone ai-agents-usage-stats-exporter repo
   ansible.builtin.git:
-    repo: "{{ ai_agents_usage_stats_exporter }}"
+    repo: "{{ ai_agents_usage_stats_exporter_git_repo }}"
     dest: /var/tmp/ai-agents-usage-stats-exporter
     version: "{{ ai_agents_usage_stats_exporter_version }}"
 

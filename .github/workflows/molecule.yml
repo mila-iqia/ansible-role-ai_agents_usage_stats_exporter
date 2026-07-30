@@ -1,0 +1,41 @@
+---
+name: ai_agents_usage_stats_exporter unit testing
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    # Every Monday at 7:47 EST
+    - cron: "47 11 * * 1"
+
+jobs:
+  molecule:
+    name: ${{ matrix.distro }} - Molecule tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu2204
+          - ubuntu2404
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: 'ai_agents_usage_stats_exporter'
+
+      - name: Setup python environment
+        uses: actions/setup-python@v5
+
+      - name: Install test dependencies
+        run: pip3 install tox
+
+      - name: Run molecule tests
+        run: tox
+        working-directory: ai_agents_usage_stats_exporter
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          PY_COLORS: 1
+          ANSIBLE_FORCE_COLOR: 1
