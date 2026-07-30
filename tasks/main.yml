@@ -31,10 +31,9 @@
   notify: Restart ai-agents-usage-stats-exporter
 
 - name: Install ai-agents-usage-stats-exporter.service
-  ansible.builtin.copy:
-    src: /var/tmp/ai-agents-usage-stats-exporter/ai-agents-usage-stats-exporter.service
+  ansible.builtin.template:
+    src: ai-agents-usage-stats-exporter.service.j2
     dest: /etc/systemd/system/ai-agents-usage-stats-exporter.service
-    remote_src: true
     owner: root
     group: root
     mode: 0644

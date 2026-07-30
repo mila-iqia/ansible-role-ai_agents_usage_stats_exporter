@@ -2,7 +2,7 @@ galaxy_info:
   role_name: ai_agents_usage_stats_exporter
   namespace: mila
   author: Pierre Bouchez
-  description: Install and configure Prometheus Slurm Job Exporter
+  description: Install and configure AI agents usage stats exporter
   company: Mila
 
   license: MIT
@@ -26,7 +26,6 @@ galaxy_info:
 
   galaxy_tags:
     - prometheus
-    - slurm
     #
     # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
     #       Maximum 20 tags per role.

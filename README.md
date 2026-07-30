@@ -1,4 +1,4 @@
-Slurm Job Exporter
+AI Agents Usage Stats exporter
 ==================
 
 This role installs and configures the Prometheus [AI Agents Usage Stats Exporter](https://github.com/mila-iqia/ai-agents-usage-stats-exporter).
