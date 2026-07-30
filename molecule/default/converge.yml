@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ai_agents_usage_stats_exporter"
+      include_role:
+        name: "mila.ai_agents_usage_stats_exporter"

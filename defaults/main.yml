@@ -1,0 +1,4 @@
+---
+ai_agents_usage_stats_exporter_git_repo: "https://github.com/mila-iqia/ai-agents-usage-stats-exporter.git"
+ai_agents_usage_stats_exporter_version: "v0.1.0"
+ai_agents_usage_stats_exporter_path: "/opt/ai-agents-usage-stats-exporter"

@@ -1,0 +1,7 @@
+---
+- name: Restart ai-agents-usage-stats-exporter
+  ansible.builtin.systemd:
+    name: ai-agents-usage-stats-exporter.service
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

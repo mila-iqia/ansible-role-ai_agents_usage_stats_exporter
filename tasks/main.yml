@@ -1,0 +1,40 @@
+---
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-prometheus-client
+      - python3-psutil
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Clone ai-agents-usage-stats-exporter repo
+  ansible.builtin.git:
+    repo: "{{ ai_agents_usage_stats_exporter }}"
+    dest: /var/tmp/ai-agents-usage-stats-exporter
+    version: "{{ ai_agents_usage_stats_exporter_version }}"
+
+- name: "Ensure destination path exists: {{ ai_agents_usage_stats_exporter_path }}"
+  ansible.builtin.file:
+    path: "{{ ai_agents_usage_stats_exporter_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Install ai_agents_usage_stats_exporter.py
+  ansible.builtin.copy:
+    src: /var/tmp/ai-agents-usage-stats-exporter/ai_agents_usage_stats_exporter.py
+    dest: "{{ ai_agents_usage_stats_exporter_path }}/ai_agents_usage_stats_exporter.py"
+    remote_src: true
+    owner: root
+    group: root
+    mode: 0640
+  notify: Restart ai-agents-usage-stats-exporter
+
+- name: Install ai_agents_usage_stats_exporter.service
+  ansible.builtin.template:
+    src: /var/tmp/ai-agents-usage-stats-exporter/ai-agents-usage-stats-exporter.service
+    dest: /etc/systemd/system/ai-agents-usage-stats-exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart ai-agents-usage-stats-exporter
