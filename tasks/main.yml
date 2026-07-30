@@ -4,6 +4,7 @@
     name:
       - python3-prometheus-client
       - python3-psutil
+      - python3-typing-extensions
   when: ansible_facts['os_family'] == 'Debian'
 
 - name: Clone ai-agents-usage-stats-exporter repo
